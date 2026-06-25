@@ -5,7 +5,8 @@
 **_Sistem Manajemen Helpdesk & Tiket yang Terintegrasi._**
 
 Aplikasi Android native untuk pelaporan dan penanganan masalah secara real-time.
-Tugas besar mata kuliah **Mobile Programming**. Dikembangkan dengan arsitektur Native Java dan koneksi langsung JDBC.
+Tugas besar mata kuliah **Mobile Programming**. Dikembangkan oleh kelompok yang beranggotakan 3 orang:
+<br/>**Arnest Suhendra** (2350081054) • **Bagas Ibnu Abdillah** (2350081074) • **Putra Michael Sitohang** (2350081087)
 
 ![version](https://img.shields.io/badge/version-1.0.0-4CAF50?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Android-3DDC84?style=flat-square)
