@@ -19,7 +19,7 @@ Dikembangkan sebagai solusi Helpdesk dengan arsitektur Native Java dan koneksi l
 
 ## Tentang
 
-TickTrack adalah aplikasi helpdesk berbasis Android yang memungkinkan kolaborasi tanpa hambatan antara pengguna, teknisi, dan administrator. Pengguna dapat dengan mudah membuat tiket pelaporan masalah, berinteraksi layaknya obrolan pesan (chat-style) dengan teknisi, serta memonitor status penyelesaian. Aplikasi ini dibangun dengan fokus pada efisiensi, performa, dan antarmuka yang bersih serta profesional.
+TickTrack adalah aplikasi helpdesk berbasis Android yang memungkinkan kolaborasi tanpa hambatan antara pengguna dan administrator. Pengguna dapat dengan mudah membuat tiket pelaporan masalah, berinteraksi layaknya obrolan pesan (chat-style) dengan admin, serta memonitor status penyelesaian. Aplikasi ini dibangun dengan fokus pada efisiensi, performa, dan antarmuka yang bersih serta profesional.
 
 Tiga nilai inti yang mengarahkan setiap keputusan desain dan kode:
 
@@ -50,17 +50,17 @@ Aplikasi ini mencakup lebih dari 10 modul utama untuk memastikan kelancaran alur
 | Kode | Fitur | Catatan |
 |---|---|---|
 | F-01 | Registrasi Akun | Pendaftaran pengguna baru dengan enkripsi password menggunakan library `jBcrypt` |
-| F-02 | Autentikasi Login | Keamanan akses berlapis dengan validasi sesi dan deteksi peran otomatis (User/Teknisi/Admin) |
+| F-02 | Autentikasi Login | Keamanan akses berlapis dengan validasi sesi dan deteksi peran otomatis (User/Admin) |
 | F-03 | Dashboard Utama | Ringkasan statistik (Total, Selesai, Tertunda) dengan grafik visual interaktif `MPAndroidChart` |
 | F-04 | Pelaporan (Buat Tiket) | Form input untuk melaporkan insiden/kendala dengan parameter Kategori, Prioritas, dan Deskripsi |
 | F-05 | Riwayat & Daftar Tiket | Timeline `RecyclerView` responsif dengan fitur tarik-untuk-menyegarkan (*Swipe-to-Refresh*) |
 | F-06 | Detail Tiket Bergaya Chat | UI interaktif menyerupai ruang obrolan (chat-room) untuk membaca alur penyelesaian masalah |
-| F-07 | Balasan Tiket (Replies) | Kolom interaktif pada detail tiket yang memungkinkan percakapan antara Pelapor dan Teknisi |
+| F-07 | Balasan Tiket (Replies) | Kolom interaktif pada detail tiket yang memungkinkan percakapan antara Pelapor dan Admin |
 | F-08 | Manajemen Profil | Halaman khusus yang menampilkan ringkasan informasi personal dan peran pengguna saat ini |
 | F-09 | Edit Data Diri | Formulir pembaruan identitas yang langsung tersinkronisasi (real-time) dengan database MySQL |
 | F-10 | Keamanan Kata Sandi | Fasilitas ganti kata sandi berlapis, mensyaratkan validasi password lama yang ter-hash |
 | F-11 | Empty States & Animasi | Penanganan skenario "tanpa data" yang ramah (Lottie) serta skeleton loading (Shimmer) |
-| F-12 | Role-Based Access (RBAC) | Tampilan dan izin akses fungsi otomatis menyesuaikan entitas: Pengguna Biasa vs Teknisi/Admin |
+| F-12 | Role-Based Access (RBAC) | Tampilan dan izin akses fungsi otomatis menyesuaikan entitas: Pengguna Biasa vs Admin |
 
 ---
 

@@ -1,0 +1,26 @@
+==================================================
+AKUN DEMO APLIKASI TICKTRACK (DATABASE USER)
+==================================================
+Silakan gunakan kredensial berikut untuk melakukan testing atau demonstrasi aplikasi berdasarkan peran (role) masing-masing:
+
+1. ROLE: ADMIN
+   Digunakan untuk memantau seluruh sistem, melihat statistik menyeluruh, dan mengelola tiket.
+   - Email    : admin@ticktrack.com
+   - Password : password123
+
+2. ROLE: USER (PENGGUNA BIASA)
+   Digunakan untuk membuat tiket baru, memantau status masalah yang dilaporkan, dan membalas pesan.
+   - Email    : user@ticktrack.com
+   - Password : password123
+
+==================================================
+CATATAN PENTING:
+- Pastikan akun-akun di atas sudah Anda daftarkan ke dalam database MySQL Anda (tabel `users`).
+- Karena aplikasi ini menggunakan `jBcrypt` untuk keamanan, password TIDAK BISA dimasukkan ke database dengan teks biasa (plain text).
+- CARA TERMUDAH MENGAKALINYA: 
+  1. Jalankan aplikasi TickTrack, lalu buat 2 akun baru di halaman *Register* menggunakan email di atas.
+  2. Secara otomatis, kedua akun tersebut akan memiliki role 'user'.
+  3. Buka database MySQL Anda (misal lewat phpMyAdmin).
+  4. Ubah kolom `role` pada akun admin menjadi 'admin'.
+  5. Akun demo siap digunakan untuk presentasi!
+==================================================
