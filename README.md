@@ -29,20 +29,6 @@ Tiga nilai inti yang mengarahkan setiap keputusan desain dan kode:
 
 ---
 
-## Pratinjau
-
-| Dashboard | Daftar Tiket | Detail Tiket (Chat) |
-|:---:|:---:|:---:|
-| <img src="screenshots/01_dashboard.png" alt="Dashboard" width="240" /> | <img src="screenshots/02_ticket_list.png" alt="Daftar Tiket" width="240" /> | <img src="screenshots/03_ticket_detail.png" alt="Detail Tiket" width="240" /> |
-
-| Buat Tiket | Profil Pengguna | Login |
-|:---:|:---:|:---:|
-| <img src="screenshots/04_create_ticket.png" alt="Buat Tiket" width="240" /> | <img src="screenshots/05_profile.png" alt="Profil Pengguna" width="240" /> | <img src="screenshots/06_login.png" alt="Login" width="240" /> |
-
-*(Catatan: Anda dapat menempatkan screenshot aplikasi Anda ke dalam folder `screenshots/` agar gambar di atas muncul dengan benar)*
-
----
-
 ## Fitur
 
 Aplikasi ini mencakup lebih dari 10 modul utama untuk memastikan kelancaran alur operasional helpdesk. Berikut rinciannya:
