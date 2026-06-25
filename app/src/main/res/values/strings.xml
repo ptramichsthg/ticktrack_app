@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TickTrack</string>
+    <string name="login_title">Selamat Datang Kembali</string>
+    <string name="login_subtitle">Masuk ke akun Anda untuk melanjutkan</string>
+    <string name="register_title">Buat Akun Baru</string>
+    <string name="register_subtitle">Daftar untuk mulai menggunakan TickTrack</string>
+    <string name="hint_email">nama@perusahaan.com</string>
+    <string name="hint_password">Minimal 6 karakter</string>
+    <string name="hint_name">Nama lengkap Anda</string>
+    <string name="hint_confirm_password">Ulangi password Anda</string>
+    <string name="btn_login">Masuk ke Akun</string>
+    <string name="btn_register">Buat Akun</string>
+    <string name="btn_create_ticket">Buat Tiket Baru</string>
+    <string name="no_account">Belum punya akun? Daftar sekarang</string>
+    <string name="has_account">Sudah punya akun? Masuk sekarang</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_tickets">Tiket</string>
+    <string name="nav_profile">Profil</string>
+    <string name="empty_tickets">Belum ada tiket</string>
+    <string name="empty_tickets_desc">Buat tiket pertama Anda untuk memulai</string>
+    <string name="loading">Memproses...</string>
+    <string name="logout">Keluar</string>
+    <string name="logout_confirm">Apakah Anda yakin ingin keluar?</string>
+</resources>

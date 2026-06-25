@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TickTrack Brand Colors (Material You) -->
+    <color name="seed">#2563EB</color>
+
+    <!-- Primary -->
+    <color name="md_theme_light_primary">#2563EB</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#DBE1FF</color>
+    <color name="md_theme_light_onPrimaryContainer">#001849</color>
+
+    <!-- Secondary -->
+    <color name="md_theme_light_secondary">#585E71</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#DCE2F9</color>
+
+    <!-- Background & Surface -->
+    <color name="md_theme_light_background">#F8FAFC</color>
+    <color name="md_theme_light_onBackground">#1B1B1F</color>
+    <color name="md_theme_light_surface">#FFFFFF</color>
+    <color name="md_theme_light_onSurface">#1B1B1F</color>
+    <color name="md_theme_light_surfaceVariant">#E1E2EC</color>
+
+    <!-- Error -->
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+
+    <!-- Outline -->
+    <color name="md_theme_light_outline">#757780</color>
+
+    <!-- Status Colors -->
+    <color name="status_open">#2563EB</color>
+    <color name="status_in_progress">#F59E0B</color>
+    <color name="status_resolved">#10B981</color>
+    <color name="status_rejected">#EF4444</color>
+
+    <!-- Priority Colors -->
+    <color name="priority_low">#6B7280</color>
+    <color name="priority_medium">#3B82F6</color>
+    <color name="priority_high">#F59E0B</color>
+    <color name="priority_urgent">#EF4444</color>
+
+    <!-- Gradient -->
+    <color name="gradient_start">#2563EB</color>
+    <color name="gradient_end">#1D4ED8</color>
+
+    <!-- Shimmer -->
+    <color name="shimmer_base">#E5E7EB</color>
+    <color name="shimmer_highlight">#F3F4F6</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="text_hint">#9CA3AF</color>
+    <color name="divider">#E5E7EB</color>
+    <color name="card_bg">#FFFFFF</color>
+</resources>
