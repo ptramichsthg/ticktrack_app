@@ -137,4 +137,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
         binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         binding.btnSave.setText(isLoading ? "Menyimpan..." : "Ubah Password");
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (executorService != null) {
+            executorService.shutdown();
+        }
+    }
 }

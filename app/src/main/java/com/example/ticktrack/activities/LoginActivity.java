@@ -153,4 +153,12 @@ public class LoginActivity extends AppCompatActivity {
         binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         binding.btnLogin.setText(isLoading ? "Memproses..." : "Masuk");
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (executorService != null) {
+            executorService.shutdown();
+        }
+    }
 }

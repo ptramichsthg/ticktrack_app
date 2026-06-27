@@ -113,6 +113,9 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (executorService != null) {
+            executorService.shutdown();
+        }
         binding = null;
     }
 }

@@ -233,6 +233,9 @@ public class TicketListFragment extends Fragment implements OnTicketClickListene
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (executorService != null) {
+            executorService.shutdown();
+        }
         binding = null;
     }
 }

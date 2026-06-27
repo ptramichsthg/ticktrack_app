@@ -169,4 +169,12 @@ public class CreateTicketActivity extends AppCompatActivity {
         binding.btnSubmit.setEnabled(!isLoading);
         binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (executorService != null) {
+            executorService.shutdown();
+        }
+    }
 }

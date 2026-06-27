@@ -102,4 +102,12 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         binding.btnSave.setText(isLoading ? "Menyimpan..." : "Simpan Perubahan");
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (executorService != null) {
+            executorService.shutdown();
+        }
+    }
 }
