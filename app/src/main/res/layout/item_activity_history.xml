@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/ivActionIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/ic_menu_recent_history"
+        android:layout_marginEnd="12dp"
+        app:tint="#64748B"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvActionDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin membalas tiket"
+            android:textSize="14sp"
+            android:textColor="#334155"/>
+
+        <TextView
+            android:id="@+id/tvActionDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12 Jan 2024 10:00"
+            android:textSize="12sp"
+            android:textColor="#94A3B8"/>
+    </LinearLayout>
+</LinearLayout>

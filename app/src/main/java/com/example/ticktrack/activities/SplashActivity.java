@@ -11,6 +11,12 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // Setup database in background
+        new Thread(() -> {
+            com.example.ticktrack.db.DatabaseConnection.setupDatabase();
+        }).start();
+
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             SessionManager session = new SessionManager(this);
             Intent intent;

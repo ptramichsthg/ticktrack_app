@@ -21,39 +21,60 @@
         android:id="@+id/llFilterContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
-        android:gravity="center_vertical"
+        android:paddingVertical="12dp"
         android:background="#FFFFFF"
         android:elevation="2dp"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
         
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="@drawable/bg_spinner"
-            android:layout_marginEnd="8dp"
-            app:queryHint="Cari judul/kode..."
+            android:layout_marginBottom="8dp"
+            app:queryHint="Cari judul atau kode tiket..."
             app:iconifiedByDefault="false" />
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Filter Status:"
-            android:textStyle="bold"
-            android:textColor="#334155"/>
             
-        <Spinner
-            android:id="@+id/spinnerFilter"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/bg_spinner"/>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                
+                <Spinner
+                    android:id="@+id/spinnerStatus"
+                    android:layout_width="140dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_spinner"/>
+                    
+                <Spinner
+                    android:id="@+id/spinnerCategory"
+                    android:layout_width="140dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_spinner"/>
+                    
+                <Spinner
+                    android:id="@+id/spinnerPriority"
+                    android:layout_width="140dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_spinner"/>
+                    
+                <Spinner
+                    android:id="@+id/spinnerSort"
+                    android:layout_width="140dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_spinner"/>
+            </LinearLayout>
+        </HorizontalScrollView>
     </LinearLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -68,6 +89,27 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerViewContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    
+                    <include layout="@layout/layout_shimmer_ticket" />
+                    <include layout="@layout/layout_shimmer_ticket" />
+                    <include layout="@layout/layout_shimmer_ticket" />
+                    <include layout="@layout/layout_shimmer_ticket" />
+                    <include layout="@layout/layout_shimmer_ticket" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTickets"

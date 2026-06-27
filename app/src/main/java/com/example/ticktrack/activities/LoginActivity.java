@@ -105,17 +105,28 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         if (isPasswordMatch) {
-                            int userId = rs.getInt("id");
-                            String name = rs.getString("name");
-                            String role = rs.getString("role");
+                            boolean isActive = true;
+                            try { isActive = rs.getBoolean("is_active"); } catch (Exception ignored) {}
                             
-                            mainHandler.post(() -> {
-                                setLoading(false);
-                                session.saveLoginSession("", userId, name, email, role);
-                                Toast.makeText(this, "Selamat datang, " + name, Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(this, MainActivity.class));
-                                finish();
-                            });
+                            if (!isActive) {
+                                mainHandler.post(() -> {
+                                    setLoading(false);
+                                    binding.errorCard.setVisibility(View.VISIBLE);
+                                    binding.tvError.setText("Akun Anda telah dinonaktifkan oleh Admin");
+                                });
+                            } else {
+                                int userId = rs.getInt("id");
+                                String name = rs.getString("name");
+                                String role = rs.getString("role");
+                                
+                                mainHandler.post(() -> {
+                                    setLoading(false);
+                                    session.saveLoginSession("", userId, name, email, role);
+                                    Toast.makeText(this, "Selamat datang, " + name, Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(this, MainActivity.class));
+                                    finish();
+                                });
+                            }
                         } else {
                             mainHandler.post(() -> {
                                 setLoading(false);

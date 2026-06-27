@@ -22,8 +22,14 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     }
 
     public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>(tickets);
         notifyDataSetChanged();
+    }
+
+    public void addTickets(List<Ticket> newTickets) {
+        int startPos = this.tickets.size();
+        this.tickets.addAll(newTickets);
+        notifyItemRangeInserted(startPos, newTickets.size());
     }
 
     @NonNull

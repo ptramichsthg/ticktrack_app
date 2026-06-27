@@ -35,6 +35,25 @@
         <activity android:name=".activities.TicketDetailActivity" />
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.ChangePasswordActivity" />
+        <activity android:name=".activities.UserManagementActivity" />
+        <activity android:name=".activities.UserDetailActivity" />
+        <activity android:name=".activities.CategoryManagementActivity" />
+        <activity android:name=".activities.AnalyticsActivity" />
+        
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 </manifest>

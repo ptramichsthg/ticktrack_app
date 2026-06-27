@@ -17,6 +17,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.OpenableColumns;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import android.database.Cursor;
 
 public class CreateTicketActivity extends AppCompatActivity {
     private ActivityCreateTicketBinding binding;
@@ -25,6 +33,12 @@ public class CreateTicketActivity extends AppCompatActivity {
     private Handler mainHandler;
     private List<Integer> categoryIds = new ArrayList<>();
     private List<String> categoryNames = new ArrayList<>();
+    
+    private byte[] attachmentBytes = null;
+    private String attachmentName = null;
+    private String attachmentType = null;
+    
+    private ActivityResultLauncher<String> filePickerLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +59,56 @@ public class CreateTicketActivity extends AppCompatActivity {
 
         loadCategories();
 
+        filePickerLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+            if (uri != null) {
+                processSelectedFile(uri);
+            }
+        });
+
+        binding.btnAttach.setOnClickListener(v -> filePickerLauncher.launch("*/*"));
         binding.btnSubmit.setOnClickListener(v -> submitTicket(priorities));
+    }
+
+    private void processSelectedFile(Uri uri) {
+        try {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
+                
+                String fileName = cursor.getString(nameIndex);
+                long fileSize = cursor.getLong(sizeIndex);
+                
+                if (fileSize > 2 * 1024 * 1024) { // 2 MB Limit
+                    Toast.makeText(this, "Ukuran file maksimal 2MB", Toast.LENGTH_SHORT).show();
+                    cursor.close();
+                    return;
+                }
+                
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+                int bufferSize = 1024;
+                byte[] buffer = new byte[bufferSize];
+                int len = 0;
+                while ((len = inputStream.read(buffer)) != -1) {
+                    byteBuffer.write(buffer, 0, len);
+                }
+                
+                attachmentBytes = byteBuffer.toByteArray();
+                attachmentName = fileName;
+                attachmentType = getContentResolver().getType(uri);
+                if (attachmentType == null) {
+                    attachmentType = "application/octet-stream";
+                }
+                
+                binding.tvAttachmentName.setText(fileName);
+                
+                cursor.close();
+                inputStream.close();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Gagal memproses file", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadCategories() {
@@ -124,7 +187,7 @@ public class CreateTicketActivity extends AppCompatActivity {
                     String code = String.format("TK-%06d", nextId);
 
                     String query = "INSERT INTO tickets (code, user_id, category_id, title, description, priority, status) VALUES (?, ?, ?, ?, ?, ?, 'open')";
-                    stmt = connection.prepareStatement(query);
+                    stmt = connection.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS);
                     stmt.setString(1, code);
                     stmt.setInt(2, session.getUserId());
                     stmt.setInt(3, categoryId);
@@ -134,6 +197,43 @@ public class CreateTicketActivity extends AppCompatActivity {
 
                     int result = stmt.executeUpdate();
                     if (result > 0) {
+                        ResultSet keys = stmt.getGeneratedKeys();
+                        if (keys.next()) {
+                            int newTicketId = keys.getInt(1);
+                            
+                            // Insert Attachment if present
+                            if (attachmentBytes != null) {
+                                try (PreparedStatement attachStmt = connection.prepareStatement("INSERT INTO attachments (ticket_id, file_name, file_type, file_size, file_data) VALUES (?, ?, ?, ?, ?)")) {
+                                    attachStmt.setInt(1, newTicketId);
+                                    attachStmt.setString(2, attachmentName);
+                                    attachStmt.setString(3, attachmentType);
+                                    attachStmt.setInt(4, attachmentBytes.length);
+                                    attachStmt.setBytes(5, attachmentBytes);
+                                    attachStmt.executeUpdate();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            
+                            try (PreparedStatement actStmt = connection.prepareStatement("INSERT INTO activities (ticket_id, user_id, action_type, description) VALUES (?, ?, ?, ?)")) {
+                                actStmt.setInt(1, newTicketId);
+                                actStmt.setInt(2, session.getUserId());
+                                actStmt.setString(3, "TICKET_CREATED");
+                                String roleStr = session.getRole().equals("admin") ? "Admin" : "User";
+                                actStmt.setString(4, roleStr + " " + session.getName() + " membuat Ticket");
+                                actStmt.executeUpdate();
+                            } catch (Exception ignored) {}
+                            
+                            // Send notification to all admins
+                            try (PreparedStatement notifStmt = connection.prepareStatement(
+                                "INSERT INTO notifications (user_id, title, message, ticket_id) " +
+                                "SELECT id, 'Tiket Baru Dibuat', ?, ? FROM users WHERE role = 'admin'")) {
+                                notifStmt.setString(1, "Tiket " + code + " telah dibuat oleh " + session.getName());
+                                notifStmt.setInt(2, newTicketId);
+                                notifStmt.executeUpdate();
+                            } catch (Exception ignored) {}
+                        }
+                        
                         mainHandler.post(() -> {
                             setLoading(false);
                             Toast.makeText(this, "Tiket berhasil dibuat!", Toast.LENGTH_SHORT).show();

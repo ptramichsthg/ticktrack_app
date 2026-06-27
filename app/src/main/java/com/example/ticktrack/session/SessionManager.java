@@ -12,7 +12,6 @@ public class SessionManager {
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
-    private static final String KEY_PHONE = "phone";
     private static final String KEY_ROLE = "role"; // "admin" or "user"
 
     public SessionManager(Context context) {
@@ -29,10 +28,9 @@ public class SessionManager {
         editor.commit();
     }
 
-    public void updateProfile(String name, String email, String phone) {
+    public void updateProfile(String name, String email) {
         editor.putString(KEY_NAME, name);
         editor.putString(KEY_EMAIL, email);
-        editor.putString(KEY_PHONE, phone);
         editor.commit();
     }
 
@@ -58,10 +56,6 @@ public class SessionManager {
 
     public String getEmail() {
         return prefs.getString(KEY_EMAIL, "");
-    }
-
-    public String getPhone() {
-        return prefs.getString(KEY_PHONE, "");
     }
 
     public void setDarkMode(boolean isDark) {

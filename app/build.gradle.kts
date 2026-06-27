@@ -59,6 +59,9 @@ dependencies {
     // Swipe Refresh
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    // uCrop for image cropping
+    implementation("com.github.yalantis:ucrop:2.2.8")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
