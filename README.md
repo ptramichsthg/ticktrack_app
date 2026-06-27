@@ -2,10 +2,10 @@
 
 # TickTrack
 
-**_Sistem Manajemen Helpdesk & Tiket yang Terintegrasi._**
+**_Sistem Manajemen Helpdesk & Tiket Skala Enterprise._**
 
-Aplikasi Android native untuk pelaporan dan penanganan masalah secara real-time.
-Tugas besar mata kuliah **Mobile Programming**. Dikembangkan oleh kelompok yang beranggotakan 3 orang:
+Aplikasi Android native untuk pelaporan dan penanganan masalah secara *real-time*.
+Dikembangkan untuk menghadirkan pengalaman pengguna kelas atas dalam manajemen kendala operasional, lengkap dengan dasbor analitik dan keamanan standar industri.
 <br/>**Arnest Suhendra** (2350081054) • **Bagas Ibnu Abdillah** (2350081074) • **Putra Michael Sitohang** (2350081087)
 
 ![version](https://img.shields.io/badge/version-1.0.0-4CAF50?style=flat-square)
@@ -18,121 +18,98 @@ Tugas besar mata kuliah **Mobile Programming**. Dikembangkan oleh kelompok yang 
 
 ---
 
-## Tentang
+## 📖 Tentang
 
-TickTrack adalah aplikasi helpdesk berbasis Android yang memungkinkan kolaborasi tanpa hambatan antara pengguna dan administrator. Pengguna dapat dengan mudah membuat tiket pelaporan masalah, berinteraksi layaknya obrolan pesan (chat-style) dengan admin, serta memonitor status penyelesaian. Aplikasi ini dibangun dengan fokus pada efisiensi, performa, dan antarmuka yang bersih serta profesional.
+TickTrack adalah aplikasi *helpdesk* berbasis Android yang memungkinkan kolaborasi tanpa hambatan antara pengguna (*Users*) dan administrator (*Admins*). Pengguna dapat dengan mudah membuat tiket pelaporan masalah, berinteraksi layaknya obrolan pesan (*chat-style*) dengan admin, serta memonitor status penyelesaian. Bagi administrator, TickTrack menyediakan *control-center* penuh mulai dari pelacakan analitik hingga pengelolaan akun secara komprehensif.
 
-Tiga nilai inti yang mengarahkan setiap keputusan desain dan kode:
-
-- **Efisien** — pengelolaan tiket yang cepat dan terstruktur
-- **Transparan** — riwayat respons dan status tiket dapat dipantau secara real-time
-- **Intuitif** — antarmuka pengguna yang modern dengan animasi halus dan visualisasi data
+Aplikasi ini dibangun menggunakan arsitektur **Native Android (Java)** dan terhubung langsung secara asinkron ke server **MySQL** melalui JDBC, memastikan latensi data yang sangat minim.
 
 ---
 
-## Fitur
+## 🌟 Fitur Utama (v1.0.0 Production Ready)
 
-Aplikasi ini mencakup lebih dari 10 modul utama untuk memastikan kelancaran alur operasional helpdesk. Berikut rinciannya:
+Aplikasi ini memiliki 10 modul ekosistem inti yang berjalan dengan sinkronisasi penuh:
 
-| Kode | Fitur | Catatan |
-|---|---|---|
-| F-01 | Registrasi Akun | Pendaftaran pengguna baru dengan enkripsi password menggunakan library `jBcrypt` |
-| F-02 | Autentikasi Login | Keamanan akses berlapis dengan validasi sesi dan deteksi peran otomatis (User/Admin) |
-| F-03 | Dashboard Utama | Ringkasan statistik (Total, Selesai, Tertunda) dengan grafik visual interaktif `MPAndroidChart` |
-| F-04 | Pelaporan (Buat Tiket) | Form input untuk melaporkan insiden/kendala dengan parameter Kategori, Prioritas, dan Deskripsi |
-| F-05 | Riwayat & Daftar Tiket | Timeline `RecyclerView` responsif dengan fitur tarik-untuk-menyegarkan (*Swipe-to-Refresh*) |
-| F-06 | Detail Tiket Bergaya Chat | UI interaktif menyerupai ruang obrolan (chat-room) untuk membaca alur penyelesaian masalah |
-| F-07 | Balasan Tiket (Replies) | Kolom interaktif pada detail tiket yang memungkinkan percakapan antara Pelapor dan Admin |
-| F-08 | Manajemen Profil | Halaman khusus yang menampilkan ringkasan informasi personal dan peran pengguna saat ini |
-| F-09 | Edit Data Diri | Formulir pembaruan identitas yang langsung tersinkronisasi (real-time) dengan database MySQL |
-| F-10 | Keamanan Kata Sandi | Fasilitas ganti kata sandi berlapis, mensyaratkan validasi password lama yang ter-hash |
-| F-11 | Empty States & Animasi | Penanganan skenario "tanpa data" yang ramah (Lottie) serta skeleton loading (Shimmer) |
-| F-12 | Role-Based Access (RBAC) | Tampilan dan izin akses fungsi otomatis menyesuaikan entitas: Pengguna Biasa vs Admin |
+1. **🔒 Autentikasi (Login/Register)**
+   Sistem login aman dengan enkripsi password menggunakan algoritma hashing **BCrypt**.
+   
+2. **🏠 Dashboard Berbasis Peran**
+   Tampilan *dashboard* dinamis yang beradaptasi dengan peran pengguna. Admin melihat metrik statistik seluruh sistem, sementara User memantau tiket pribadinya.
+   
+3. **🎫 Manajemen Tiket (Ticket List)**
+   Kemampuan untuk melakukan filter, urutkan (sort), dan mencari tiket. Memanfaatkan UI bersih ala *Material Design* lengkap dengan animasi *Shimmer Loading*.
+   
+4. **💬 Interaksi Detail Tiket (Chat & Timeline)**
+   Ruang diskusi interaktif (*real-time chat*) di dalam setiap tiket untuk mempermudah komunikasi penyelesaian antara pelapor dan tim teknisi.
+   
+5. **🗂️ Manajemen Pengguna (Admin Only)**
+   Fitur administratif untuk melihat daftar akun, mencari profil, dan menonaktifkan pengguna (*Deactivate Account*) yang melanggar ketentuan.
+   
+6. **🏷️ Manajemen Kategori (Admin Only)**
+   Sistem operasi CRUD *(Create, Read, Update, Delete)* untuk entitas kategori tiket, dilengkapi dengan manajemen kode warna (Hex Color) dan proteksi penghapusan relasional.
+   
+7. **🔔 Pusat Notifikasi Berbasis Event**
+   Pengiriman notifikasi otomatis *(event-driven)* saat ada tiket baru, penolakan, penutupan, maupun pesan baru. Cukup klik untuk melompat langsung ke halaman terkait.
+   
+8. **📜 Riwayat Aktivitas & Jejak Audit**
+   Audit aktivitas terperinci yang mencatat waktu, aksi, dan aktor (Siapa melakukan Apa) untuk transparansi SLA *(Service Level Agreement)* yang profesional.
+   
+9. **📊 Laporan & Analitik (Reports)**
+   Halaman dasbor layar penuh eksklusif yang memuat 6 diagram statistik interaktif ditenagai oleh **MPAndroidChart** (Tren Harian/Bulanan, Komposisi Kategori/Status, Top Users).
+   
+10. **⚙️ Pengaturan Profil (Settings & Upload)**
+    Fasilitas manajemen akun di mana pengguna dapat mengedit data diri, mengganti kata sandi, dan memotong *(crop)* lalu mengunggah foto profil menggunakan pustaka **UCrop**.
 
 ---
 
-## Tech stack
+## 🛠️ Tech Stack
 
 - **Bahasa**: Java 8
 - **IDE**: Android Studio
 - **Min SDK / Target / Compile**: 24 / 36 / 36
-- **Konektivitas Database**: Native JDBC Connector (MySQL) untuk koneksi database langsung
-- **Keamanan**: `jBcrypt` untuk pencocokan dan hashing password standar industri
-- **UI & Animasi**: 
-  - Material Design Components
-  - ViewBinding untuk interaksi UI yang aman
-  - `Lottie` (6.1.0) untuk animasi vektor ringan
-  - `Facebook Shimmer` untuk efek skeleton loading
-  - `Glide` (4.16.0) untuk manajemen pemuatan gambar
-- **Visualisasi Data**: `MPAndroidChart` (v3.1.0) untuk grafik dashboard
-- **Lainnya**: SwipeRefreshLayout untuk fungsi pull-to-refresh
+- **Database Architecture**: Direct JDBC Connector (MySQL) dengan `ExecutorService` untuk multithreading di luar UI.
+- **Keamanan**: `jBcrypt` (Hashing) & IDOR Protection di level *query*.
+- **Library Terkemuka**: 
+  - `MPAndroidChart` (v3.1.0) untuk rendering grafik tingkat lanjut.
+  - `UCrop` untuk utilitas manipulasi rasio gambar profil.
+  - `Facebook Shimmer` untuk skeleton loading *feed*.
+  - `Lottie` (6.1.0) untuk animasi interaktif status kosong (Empty States).
+  - Material Design 3 (M3) UI Components.
 
 ---
 
-## Cara build
+## 🚀 Cara Build & Instalasi
 
-### Prasyarat
-
+### 1. Prasyarat
 - Android Studio versi terbaru
 - JDK 17 / JDK 8 (Dikonfigurasi melalui Android Studio)
-- Android SDK Platform 36
-- Database MySQL yang sudah berjalan dengan skema TickTrack
+- Server MySQL (XAMPP/Cloud) yang sudah menjalankan skema *database* TickTrack.
 
-### Setup
-
+### 2. Setup Repositori
 ```bash
-git clone https://github.com/USERNAME_ANDA/TickTrack-Android.git
-cd TickTrack-Android
+git clone https://github.com/ptramichsthg/ticktrack_app.git
+cd ticktrack_app
 ```
+Buka *project* melalui Android Studio, pilih **Trust project**, lalu tunggu Gradle melakukan sinkronisasi dependensi.
 
-Buka folder di Android Studio, **Trust project**, dan biarkan Gradle melakukan sinkronisasi otomatis.
+### 3. Konfigurasi Database
+Karena aplikasi ini terhubung ke MySQL melalui JDBC, Anda harus menyesuaikan konfigurasi pada kelas `DatabaseConnection.java` yang berada di direktori `com.example.ticktrack.db`:
+- Sesuaikan IP `HOST` server (Misal: `10.0.2.2` untuk localhost emulator).
+- Masukkan `USERNAME` dan `PASSWORD` database MySQL Anda.
+- Sesuaikan `DATABASE_NAME`.
 
-### Konfigurasi Database
-
-Karena aplikasi ini menggunakan JDBC secara langsung, pastikan konfigurasi koneksi database Anda sudah sesuai pada `DbConnection.java` atau file konfigurasi terkait di package `com.example.ticktrack.db`. Sesuaikan:
-- IP/Host Server (Misal: `10.0.2.2` untuk localhost dari emulator Android)
-- Username
-- Password
-- Nama Database
-
-### Build APK debug
-
+### 4. Build APK & Jalankan
+Untuk mengekspor versi *Debug*:
 ```bash
 ./gradlew assembleDebug
 ```
-
-APK akan berada di `app/build/outputs/apk/debug/app-debug.apk`.
-
-### Run di emulator / perangkat
-
-Di Android Studio: Tekan `Shift + F10`, atau pilih device target di toolbar lalu klik tombol **Run**.
-
----
-
-## Struktur kode
-
-```text
-app/src/main/
-├── java/com/example/ticktrack/
-│   ├── activities/                 # Activity untuk Login, Register, Edit Profile, dll
-│   ├── adapters/                   # RecyclerView Adapter (Tiket, Balasan Chat)
-│   ├── db/                         # Kelas konfigurasi JDBC dan eksekusi query
-│   ├── fragments/                  # Fragment utama (Dashboard, List Tiket, Profile)
-│   ├── listeners/                  # Interface callback (click listener, dll)
-│   ├── models/                     # POJO/Model data (User, Ticket, Reply)
-│   ├── session/                    # Pengelola Shared Preferences / Sesi User
-│   └── utils/                      # Helper (Format tanggal, utilitas gambar, hashing)
-└── res/                            
-    ├── layout/                     # UI XML (activity, fragment, item_list, empty_state)
-    ├── drawable/                   # Ikon dan background resource
-    ├── menu/                       # Konfigurasi Bottom Navigation
-    └── values/                     # Warna, strings, dan tema (themes.xml)
-```
+File APK siap instal akan ter-generate di folder `app/build/outputs/apk/debug/app-debug.apk`. 
+Atau, cukup tekan ikon ▶️ **Run** (Shift+F10) di Android Studio untuk meluncurkan langsung ke perangkat/emulator Anda.
 
 ---
 
 <div align="center">
 
-_TickTrack — Solusi Helpdesk dalam Genggaman._
+*TickTrack — Percepat Resolusi, Tingkatkan Efisiensi.*
 
 </div>
